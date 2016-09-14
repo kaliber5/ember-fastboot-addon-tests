@@ -45,10 +45,10 @@
     "ember-addon"
   ],
   "dependencies": {
-    "chai": "^3.5.0",
     "ember-cli-babel": "^5.1.6",
     "jquery": "^3.1.0",
-    "mocha": "^3.0.2"
+    "request": "^2.74.0",
+    "rsvp": "^3.3.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
