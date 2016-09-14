@@ -1,7 +1,7 @@
 {
   "name": "ember-fastboot-addon-tests",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Addon testing support for Fastboot compatibility",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Simon Ihmig <ihmig@kaliber5.de>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
@@ -38,13 +38,17 @@
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "ember-welcome-page": "^1.0.1",
-    "loader.js": "^4.0.1"
+    "loader.js": "^4.0.1",
+    "ember-cli-addon-tests": "simonihmig/ember-cli-addon-tests"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6"
+    "chai": "^3.5.0",
+    "ember-cli-babel": "^5.1.6",
+    "jquery": "^3.1.0",
+    "mocha": "^3.0.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

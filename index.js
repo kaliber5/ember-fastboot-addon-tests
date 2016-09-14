@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-fastboot-addon-tests'
+  name: 'ember-fastboot-addon-tests',
+
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
