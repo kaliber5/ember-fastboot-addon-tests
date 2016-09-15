@@ -2,14 +2,10 @@
 module.exports = {
   description: '',
 
-  normalizeEntityName: function() {
+  normalizeEntityName() {
   },
 
-  afterInstall: function() {
-    return this.addPackagesToProject([
-      {
-        name: 'chai'
-      }
-    ]);
+  afterInstall() {
+    return this.addPackageToProject('chai');
   }
 };
