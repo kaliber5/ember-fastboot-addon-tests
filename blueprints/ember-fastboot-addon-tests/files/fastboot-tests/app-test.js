@@ -4,10 +4,13 @@ var describeForFastboot = require('ember-fastboot-addon-tests').describeForFastb
 
 describeForFastboot('Fastboot', function() {
 
-  it('renders', function() {
+  it('renders index page', function() {
     return this.visit('/')
-      .then(function(response) {
-        expect(response.statusCode).to.equal(200);
+      .then(function(res) {
+        var $ = res.jQuery;
+        // var response = res.response;
+
+        expect($('body').length).to.equal(1);
       });
   });
 
