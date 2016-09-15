@@ -8,9 +8,6 @@ module.exports = {
   afterInstall: function() {
     return this.addPackagesToProject([
       {
-        name: 'mocha'
-      },
-      {
         name: 'chai'
       }
     ]);
