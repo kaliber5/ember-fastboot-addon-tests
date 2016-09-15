@@ -1,10 +1,10 @@
 /* jshint node: true */
 'use strict';
 
-var describeForFastboot = require('./lib/module');
+var setupTestsForFastboot = require('./lib/setup');
 
 module.exports = {
   name: 'ember-fastboot-addon-tests',
-  
-  describeForFastboot: describeForFastboot
+
+  setupTestsForFastboot: setupTestsForFastboot
 };

@@ -1,16 +1,17 @@
 /* jshint node: true */
 var expect = require('chai').expect;
-var describeForFastboot = require('ember-fastboot-addon-tests').describeForFastboot;
 
-describeForFastboot('Fastboot', function() {
+describe('<%= camelizedModuleName %>', function() {
 
-  it('works', function() {
-    return this.visit('/')
+  it('renders', function() {
+    return this.visit('/<%= camelizedModuleName %>')
       .then(function(res) {
         var $ = res.jQuery;
         // var response = res.response;
 
+        // add your real tests here
         expect($('body').length).to.equal(1);
+        expect($('h1').text().trim()).to.equal('<%= camelizedModuleName %>');
       });
   });
 

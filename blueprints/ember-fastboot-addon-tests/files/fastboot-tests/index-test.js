@@ -1,16 +1,17 @@
 /* jshint node: true */
 var expect = require('chai').expect;
-var describeForFastboot = require('ember-fastboot-addon-tests').describeForFastboot;
 
-describeForFastboot('Fastboot', function() {
+describe('index', function() {
 
-  it('renders index page', function() {
+  it('renders', function() {
     return this.visit('/')
       .then(function(res) {
         var $ = res.jQuery;
         // var response = res.response;
 
+        // add your real tests here
         expect($('body').length).to.equal(1);
+        expect($('h1').text().trim()).to.equal('ember-fastboot-addon-tests');
       });
   });
 
