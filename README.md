@@ -20,35 +20,39 @@ essential things there automatically, some "fixtures" for your temporary app and
 
 ## Testing principles
 
-Before we get our hands dirty let's make some important things clear first! Because there are some significant differences between the Fastboot tests that
-this addon adds supprot for, and the usual Ember.js tests as you might know them.
+Before we get our hands dirty let's make some important things clear first! Because there are some significant differences
+between the Fastboot tests that this addon adds support for, and the usual Ember.js tests as you might know them.
 
 #### Ember.js tests
 
-The usual Ember.js test, no matter whether these are unit, integration or acceptance tests, all run in the same browser (a real or a headless one like PhantomJS) and process 
-as the actual code you test. So you can `import` any module from your app/addon, you have a DOM available (where your integration or acceptance tests render into), you have jQuery
-and so on.
+The normal Ember.js tests, no matter whether these are unit, integration or acceptance tests, all run in the same browser 
+(a real or a headless one like PhantomJS) and process as the actual code you test. So you can `import` any module from your
+app/addon, you have a DOM available (where your integration or acceptance tests render into), you have jQuery and so on.
 
 #### Fastboot tests
 
-Contrary to that for your Fastboot tests, your test and the code to test for run in two separate processes. The Fastboot server runs your (temporarily created) app (including the 
-code from your addon like your components), but you can only access that through Fastboot's HTTP server. Your test itself also runs in a node.js environment. You send a HTTP GET 
+Contrary to that for your Fastboot tests, your test and the code to test for run in two separate processes. The Fastboot
+server runs your (temporarily created) app (including the code from your addon like your components), but you can only
+access that through Fastboot's HTTP server. Your test itself also runs in a node.js environment. You send a HTTP GET 
 request to your Fastboot server, and it gives you a response, that is some HTTP headers and basically a plain string of HTML. 
 
-So this is a real end to end test, like the tests you do with tools like Selenium/WebDriver. Your running app is a black box, and you have no information about what is happening 
-inside it, except for the HTML it returns. So no `import`, no `document`, no DOM, no jQuery (ok, wait, I might be proven wrong there!).
+So this is a real end to end test, like the tests you do with tools like Selenium/WebDriver. Your running app is a black
+box, and you have no information about what is happeninginside it, except for the HTML it returns. So no `import`, no
+`document`, no DOM, no jQuery (ok, wait, I might be proven wrong there!).
 
 ## Testing basics
 
-Let's say your addon features a component, that you want to test for Fastboot compatibility. Using that component in an app might break the app running under Fastboot, e.g. if
-you access the DOM (that does not exist in Fastboot) in a hook that Fastboot will execute, like `init` (as opposed to `didInsertElement` which Fastboot will ignore).
-For detailed information on how to make your code Fastboot compatible, please consult Fastboot's [Addon Author Guide](http://ember-fastboot.com/docs/addon-author-guide)!
+Let's say your addon features a component, that you want to test for Fastboot compatibility. Using that component in an app
+might break the app running under Fastboot, e.g. if you access the DOM (that does not exist in Fastboot) in a hook that
+Fastboot will execute, like `init` (as opposed to `didInsertElement` which Fastboot will ignore). For detailed information
+on how to make your code Fastboot compatible, please consult Fastboot's [Addon Author Guide](http://ember-fastboot.com/docs/addon-author-guide)!
 
 ### Fixtures
 
-As said in the introduction, this addon will create a temporary app with the help of `ember-cli-addon-tests`. But this app will just be a barebones Ember.js app as `ember new` would 
-have created it. To add any custom code to, in this case probably a template that uses your component, so called fixtures are used. These are files in the `fastboot-tests/fixtures`
-folder. These files will get copied into the created app. 
+As said in the introduction, this addon will create a temporary app with the help of `ember-cli-addon-tests`. But this app 
+will just be a barebones Ember.js app as `ember new` would have created it. To add any custom code to, in this case probably
+a template that uses your component, so called fixtures are used. These are files in the `fastboot-tests/fixtures` folder.
+These files will get copied into the created app. 
 
 Upon first installation of this addon, two fixture files will already have been created for you:
 
@@ -79,20 +83,25 @@ describe('index', function() {
 });
 ```
 
-This Mocha test file defines a simple test that asserts that your app's index route returns the expected HTML that the default `index.hbs` defines. Although this might seem not worth
-testing at first sight, your addon still can easily break that, e.g. by importing some external JavaScript that can only run on a browser.
+This Mocha test file defines a simple test that asserts that your app's index route returns the expected HTML that the 
+default `index.hbs` defines. Although this might seem not worth testing at first sight, your addon still can easily break
+that, e.g. by importing some external JavaScript that can only run on a browser.
  
-You may wonder here where all the necessary bootstrap code is, for building the app and spinning up the Fastboot server. The good news is, you do not have to care about this, this addon
-does all of this for you! All the setup and tear down code is added to your test suite in some `before` and `after` Mocha hooks. 
+You may wonder here where all the necessary bootstrap code is, for building the app and spinning up the Fastboot server. The
+good news is, you do not have to care about this, this addon does all of this for you! All the setup and tear down code is
+added to your test suite in some `before` and `after` Mocha hooks. 
 
-But you still may have stumbled upon the use of jQuery in the above test, although a chapter it was said that you have no DOM and no jQuery available to your tests. This is where the
-`visit` helper comes into play...
+But you still may have stumbled upon the use of jQuery in the above test, although a chapter it was said that you have no 
+DOM and no jQuery available to your tests. This is where the `visit` helper comes into play...
 
 ## The visit helper
 
-This addon gives you a `visit` helper that makes testing pretty easy. You give it a route of your app (as you would do it with the `visit` helper in an acceptance test) to make a request to. 
-It then makes a HTTP request to your Fastboot server for that route, and returns a `Promise`. When the server receives a response, it will make sure that it has a HTTP status code of 200.
-If that is not the case, the Promise will be rejected and your test will fail. Otherwise the Promise resolves with a response object, which is a POJO with the following properties:
+This addon gives you a `visit` helper that makes testing pretty easy. You give it a route of your app (as you would do it 
+with the `visit` helper in an acceptance test) to make a request to. It then makes a HTTP request to your Fastboot server
+for that route, and returns a `Promise`. When the server receives a response, it will make sure that it has a HTTP status
+code of 200. 
+If that is not the case, the Promise will be rejected and your test will fail. Otherwise the Promise resolves with a 
+response object, which is a POJO with the following properties:
 
 * `response`: the node.js response (an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)). You can use that e.g. to check the HTTP headers received 
 by accessing `response.headers`.
