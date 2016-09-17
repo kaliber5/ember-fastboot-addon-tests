@@ -2,12 +2,14 @@
 
 This is an `ember-cli` addon that makes testing your own addon for compatibility with [Fastboot](https://ember-fastboot.com/) easy and straightforward!
 
-It works by using [ember-cli-addon-tests](https://github.com/tomdale/ember-cli-addon-tests) to create a (temporary) app that consumes your addon, 
-builds it and spins up a local Fastboot server using [ember-cli-fastboot](https://github.com/ember-fastboot/ember-cli-fastboot), and then runs your
-[Mocha](https://mochajs.org/)-based end-to-end test to assert that your addon works as expected or at least does not break things up in a Fastboot environment.
+It works by using [ember-cli-addon-tests](https://github.com/tomdale/ember-cli-addon-tests) to create a (temporary) app that
+consumes your addon, builds it and spins up a local Fastboot server using [ember-cli-fastboot](https://github.com/ember-fastboot/ember-cli-fastboot), 
+and then runs your [Mocha](https://mochajs.org/)-based end-to-end test to assert that your addon works as expected or at
+least does not break things up in a Fastboot environment.
 
-*Note that this addon is still experimental, and its API unstable. While I encourage you to use it (and provide feedback and contributions if possible), please do
-not assume backwards compatibility, at least for any unstable version (0.x). So better pinpoint the version in your `package.json` and check the [Changelog](CHANGELOG.md) when updating. You have been warned!*
+*Note that this addon is still experimental, and its API unstable. While I encourage you to use it (and provide feedback and
+contributions if possible), please do not assume backwards compatibility, at least for any unstable version (0.x). So better
+pinpoint the version in your `package.json` and check the [Changelog](CHANGELOG.md) when updating. You have been warned!*
 
 ## Installation
 
@@ -15,8 +17,9 @@ not assume backwards compatibility, at least for any unstable version (0.x). So 
     
 Note that this addon needs at least node.js 4.x (mainly because of Fastboot itself).
 
-After installing the addon you should find a new folder `fastboot-tests` which will hold your test files. The default blueprint will have installed some 
-essential things there automatically, some "fixtures" for your temporary app and a first simple test.
+After installing the addon you should find a new folder `fastboot-tests` which will hold your test files. The default 
+blueprint will have installed some essential things there automatically, some "fixtures" for your temporary app and a first
+simple test.
 
 ## Testing principles
 
