@@ -1,4 +1,3 @@
-/* jshint node: true */
 var expect = require('chai').expect;
 
 describe('<%= camelizedModuleName %>', function() {
