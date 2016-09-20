@@ -18,7 +18,7 @@ pinpoint the version in your `package.json` and check the [Changelog](CHANGELOG.
 Note that this addon needs at least node.js 4.x (mainly because of Fastboot itself).
 
 After installing the addon you should find a new folder `fastboot-tests` which will hold your test files. The default 
-blueprint will have installed some essential things there automatically, some "fixtures" for your temporary app and a first
+blueprint will have installed some essential things there automatically, some "[fixtures](#fixtures)" for your temporary app and a first
 simple test.
 
 ## Testing principles
@@ -36,11 +36,11 @@ app/addon, you have a DOM available (where your integration or acceptance tests 
 
 Contrary to that for your Fastboot tests, your test and the code to test for run in two separate processes. The Fastboot
 server runs your (temporarily created) app (including the code from your addon like your components), but you can only
-access that through Fastboot's HTTP server. Your test itself also runs in a node.js environment. You send a HTTP GET 
+access that through Fastboot's HTTP server. Your test itself also runs in a node.js environment, not a browser! You can send a HTTP GET 
 request to your Fastboot server, and it gives you a response, that is some HTTP headers and basically a plain string of HTML. 
 
 So this is a real end to end test, like the tests you do with tools like Selenium/WebDriver. Your running app is a black
-box, and you have no information about what is happeninginside it, except for the HTML it returns. So no `import`, no
+box, and you have no information about what is happening inside it, except for the HTML it returns. So no `import`, no
 `document`, no DOM, no jQuery (ok, wait, I might be proven wrong there!).
 
 ## Testing basics
@@ -49,6 +49,8 @@ Let's say your addon features a component, that you want to test for Fastboot co
 might break the app running under Fastboot, e.g. if you access the DOM (that does not exist in Fastboot) in a hook that
 Fastboot will execute, like `init` (as opposed to `didInsertElement` which Fastboot will ignore). For detailed information
 on how to make your code Fastboot compatible, please consult Fastboot's [Addon Author Guide](http://ember-fastboot.com/docs/addon-author-guide)!
+
+So our goal here is to create and run an app with Fastboot that uses our component, and make sure that it works as expected...
 
 ### Fixtures
 
@@ -94,7 +96,7 @@ You may wonder here where all the necessary bootstrap code is, for building the 
 good news is, you do not have to care about this, this addon does all of this for you! All the setup and tear down code is
 added to your test suite in some `before` and `after` Mocha hooks. 
 
-But you still may have stumbled upon the use of jQuery in the above test, although a chapter it was said that you have no 
+But you still may have stumbled upon the use of jQuery in the above test, although a chapter before it was said that you have no 
 DOM and no jQuery available to your tests. This is where the `visit` helper comes into play...
 
 ## The visit helper
@@ -113,7 +115,7 @@ kind of faked DOM is available that jQuery can operate upon. So you can express 
 
 ## Adding tests
 
-Given the example that your addon features some components that you want to test, you should write separate routes (in your temporary Fastboot app) for each components to isolate the different 
+Given the example that your addon features some components that you want to test, you should write separate routes (in your temporary Fastboot app) for each component to isolate the different 
 components, as a failing component would break the whole render process. Adding a new route is easy:
 
     ember g fastboot-test foo
@@ -121,15 +123,17 @@ components, as a failing component would break the whole render process. Adding 
 This will add a new `foo.hbs` template file and register that route to your `router.js` (all in your `fastboot-tests/fixtures/app` folder). So pretty similar to what `ember g route foo` would do 
 for a real app. And it would add a `foo-test.js` file with the boilerplate for your new test.
 
-You could then add the component you want to test to your new template file, and add the DOM assertions to you test file, to check that your component will render as expected in a Fastboot environment! 
+You could then add the component you want to test to your new template file, and add the DOM assertions to your test file, to check that your component will render as expected in a Fastboot environment! 
+
+You can find some simple real world testing examples in the [ember-bootstrap](https://github.com/kaliber5/ember-bootstrap/tree/master/fastboot-tests) repository.
 
 ## Running your tests
 
     ember fastboot:test
     
-This will run all your Fastboot tests. *Note that this will take some time, as creating the app, installing all the dependencies and starting the Fastboot server is a slow process!*
+This will run all your Fastboot tests. *Note that this will take some time, as creating the app, installing all its dependencies and starting the Fastboot server is a slow process!*
 
-You might want to add that command to your `npm test` script in your `package.jso`, to run your Fastboot tests along your normal (ember-try) tests.
+You might want to add that command to your `npm test` script in your `package.json`, to run your Fastboot tests along your normal (ember-try) tests.
 
 ```json
 "scripts": {
