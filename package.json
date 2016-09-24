@@ -11,7 +11,10 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaliber5/ember-fastboot-addon-tests"
+  },
   "engines": {
     "node": ">= 4.0.0"
   },
