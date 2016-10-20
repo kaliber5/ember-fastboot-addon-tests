@@ -155,7 +155,7 @@ See `ember help fastboot:test` for additional options.
 
 ### Working with `ember-try`
 
-By default, addons use [`ember-try`][ember-try] to run tests against multiple versions of dependencies simultaneously on Travis CI.  This system can also be leveraged to run your Fastboot tests in parallel with your browser tests.  I just takes two small changes:
+By default, addons use [`ember-try`][ember-try] to run tests against multiple versions of dependencies simultaneously on Travis CI.  This system can also be leveraged to run your Fastboot tests in parallel with your browser tests.  It just takes two small changes:
 
 #### 1. Update your `config/ember-try.js`
 
