@@ -45,7 +45,8 @@
   },
   "keywords": [
     "ember-addon",
-    "fastboot"
+    "fastboot",
+    "tests"
   ],
   "dependencies": {
     "chalk": "^1.1.3",
