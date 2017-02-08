@@ -3,18 +3,18 @@
 [![Build Status](https://travis-ci.org/kaliber5/ember-fastboot-addon-tests.svg?branch=master)](https://travis-ci.org/kaliber5/ember-fastboot-addon-tests)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-fastboot-addon-tests.svg)](https://emberobserver.com/addons/ember-fastboot-addon-tests)
 
-This is an `ember-cli` addon that makes testing your own addon for compatibility with [Fastboot](https://ember-fastboot.com/) easy and straightforward!
+This is an `ember-cli` addon that makes testing your own addon for compatibility with [FastBoot](https://ember-fastboot.com/) easy and straightforward!
 
 It works by using [ember-cli-addon-tests](https://github.com/tomdale/ember-cli-addon-tests) to create a (temporary) app that
-consumes your addon, builds it and spins up a local Fastboot server using [ember-cli-fastboot](https://github.com/ember-fastboot/ember-cli-fastboot),
+consumes your addon, builds it and spins up a local FastBoot server using [ember-cli-fastboot](https://github.com/ember-fastboot/ember-cli-fastboot),
 and then runs your [Mocha](https://mochajs.org/)-based end-to-end test to assert that your addon works as expected or at
-least does not break things up in a Fastboot environment.
+least does not break things up in a FastBoot environment.
 
 ## Installation
 
     ember install ember-fastboot-addon-tests
 
-Note that this addon needs at least node.js 4.x (mainly because of Fastboot itself).
+Note that this addon needs at least node.js 4.x (mainly because of FastBoot itself).
 
 After installing the addon you should find a new folder `fastboot-tests` which will hold your test files. The default
 blueprint will have installed some essential things there automatically, some "[fixtures](#fixtures)" for your temporary app and a first
@@ -23,7 +23,7 @@ simple test.
 ## Testing principles
 
 Before we get our hands dirty let's make some important things clear first! Because there are some significant differences
-between the Fastboot tests that this addon adds support for, and the usual Ember.js tests as you might know them.
+between the FastBoot tests that this addon adds support for, and the usual Ember.js tests as you might know them.
 
 #### Ember.js tests
 
@@ -31,12 +31,12 @@ The normal Ember.js tests, no matter whether these are unit, integration or acce
 (a real or a headless one like PhantomJS) and process as the actual code you test. So you can `import` any module from your
 app/addon, you have a DOM available (where your integration or acceptance tests render into), you have jQuery and so on.
 
-#### Fastboot tests
+#### FastBoot tests
 
-Contrary to that for your Fastboot tests, your test and the code to test for run in two separate processes. The Fastboot
+Contrary to that for your FastBoot tests, your test and the code to test for run in two separate processes. The FastBoot
 server runs your (temporarily created) app (including the code from your addon like your components), but you can only
-access that through Fastboot's HTTP server. Your test itself also runs in a node.js environment, not a browser! You can send a HTTP GET
-request to your Fastboot server, and it gives you a response, that is some HTTP headers and basically a plain string of HTML.
+access that through FastBoot's HTTP server. Your test itself also runs in a node.js environment, not a browser! You can send a HTTP GET
+request to your FastBoot server, and it gives you a response, that is some HTTP headers and basically a plain string of HTML.
 
 So this is a real end to end test, like the tests you do with tools like Selenium/WebDriver. Your running app is a black
 box, and you have no information about what is happening inside it, except for the HTML it returns. So no `import`, no
@@ -44,12 +44,12 @@ box, and you have no information about what is happening inside it, except for t
 
 ## Testing basics
 
-Let's say your addon features a component, that you want to test for Fastboot compatibility. Using that component in an app
-might break the app running under Fastboot, e.g. if you access the DOM (that does not exist in Fastboot) in a hook that
-Fastboot will execute, like `init` (as opposed to `didInsertElement` which Fastboot will ignore). For detailed information
-on how to make your code Fastboot compatible, please consult Fastboot's [Addon Author Guide](http://ember-fastboot.com/docs/addon-author-guide)!
+Let's say your addon features a component, that you want to test for FastBoot compatibility. Using that component in an app
+might break the app running under FastBoot, e.g. if you access the DOM (that does not exist in FastBoot) in a hook that
+FastBoot will execute, like `init` (as opposed to `didInsertElement` which FastBoot will ignore). For detailed information
+on how to make your code FastBoot compatible, please consult FastBoot's [Addon Author Guide](http://ember-fastboot.com/docs/addon-author-guide)!
 
-So our goal here is to create and run an app with Fastboot that uses our component, and make sure that it works as expected...
+So our goal here is to create and run an app with FastBoot that uses our component, and make sure that it works as expected...
 
 ### Fixtures
 
@@ -91,7 +91,7 @@ This Mocha test file defines a simple test that asserts that your app's index ro
 default `index.hbs` defines. Although this might seem not worth testing at first sight, your addon still can easily break
 that, e.g. by importing some external JavaScript that can only run on a browser.
 
-You may wonder here where all the necessary bootstrap code is, for building the app and spinning up the Fastboot server. The
+You may wonder here where all the necessary bootstrap code is, for building the app and spinning up the FastBoot server. The
 good news is, you do not have to care about this, this addon does all of this for you! All the setup and tear down code is
 added to your test suite in some `before` and `after` Mocha hooks.
 
@@ -101,7 +101,7 @@ DOM and no jQuery available to your tests. This is where the `visit` helper come
 ## The visit helper
 
 This addon gives you a `visit` helper that makes testing pretty easy. You give it a route of your app (as you would do it
-with the `visit` helper in an acceptance test) to make a request to. It then makes a HTTP request to your Fastboot server
+with the `visit` helper in an acceptance test) to make a request to. It then makes a HTTP request to your FastBoot server
 for that route, and returns a `Promise`. When the server receives a response, it will make sure that it has a HTTP status
 code of 200.
 If that is not the case, the Promise will be rejected and your test will fail. Otherwise the Promise resolves with a
@@ -114,7 +114,7 @@ kind of faked DOM is available that jQuery can operate upon. So you can express 
 
 ## Adding tests
 
-Given the example that your addon features some components that you want to test, you should write separate routes (in your temporary Fastboot app) for each component to isolate the different
+Given the example that your addon features some components that you want to test, you should write separate routes (in your temporary FastBoot app) for each component to isolate the different
 components, as a failing component would break the whole render process. Adding a new route is easy:
 
     ember g fastboot-test foo
@@ -122,7 +122,7 @@ components, as a failing component would break the whole render process. Adding 
 This will add a new `foo.hbs` template file and register that route to your `router.js` (all in your `fastboot-tests/fixtures/app` folder). So pretty similar to what `ember g route foo` would do
 for a real app. And it would add a `foo-test.js` file with the boilerplate for your new test.
 
-You could then add the component you want to test to your new template file, and add the DOM assertions to your test file, to check that your component will render as expected in a Fastboot environment!
+You could then add the component you want to test to your new template file, and add the DOM assertions to your test file, to check that your component will render as expected in a FastBoot environment!
 
 You can find some simple real world testing examples in the [ember-bootstrap](https://github.com/kaliber5/ember-bootstrap/tree/master/fastboot-tests) repository.
 
@@ -130,9 +130,9 @@ You can find some simple real world testing examples in the [ember-bootstrap](ht
 
     ember fastboot:test
 
-This will run all your Fastboot tests. *Note that this will take some time, as creating the app, installing all its dependencies and starting the Fastboot server is a slow process!*
+This will run all your FastBoot tests. *Note that this will take some time, as creating the app, installing all its dependencies and starting the FastBoot server is a slow process!*
 
-You might want to add that command to your `npm test` script in your `package.json`, to run your Fastboot tests along your normal (ember-try) tests.
+You might want to add that command to your `npm test` script in your `package.json`, to run your FastBoot tests along your normal (ember-try) tests.
 
 ```json
 "scripts": {
@@ -144,17 +144,17 @@ You might want to add that command to your `npm test` script in your `package.js
 
 ### Specifying the Ember.js version
 
-By default the Fastboot app will be created with the same Ember.js version you have specified in your addon's `bower.json`. But you can override this with an additional option:
+By default the FastBoot app will be created with the same Ember.js version you have specified in your addon's `bower.json`. But you can override this with an additional option:
 
     ember fastboot:test --ember-version <version>
 
-You can use any version you would also specify in your `bower.json`, e.g. `release` or `2.4.0`. *Note that Fastboot itself requires at least Ember.js 2.4!*
+You can use any version you would also specify in your `bower.json`, e.g. `release` or `2.4.0`. *Note that FastBoot itself requires at least Ember.js 2.4!*
 
 See `ember help fastboot:test` for additional options.
 
 ### Working with `ember-try`
 
-By default, addons use [`ember-try`][ember-try] to run tests against multiple versions of dependencies simultaneously on Travis CI.  This system can also be leveraged to run your Fastboot tests in parallel with your browser tests.  It just takes two small changes:
+By default, addons use [`ember-try`][ember-try] to run tests against multiple versions of dependencies simultaneously on Travis CI.  This system can also be leveraged to run your FastBoot tests in parallel with your browser tests.  It just takes two small changes:
 
 #### 1. Update your `config/ember-try.js`
 
@@ -172,7 +172,7 @@ module.exports = [
 ];
 ```
 
-This will define a new `ember-try` task that runs your Fastboot tests
+This will define a new `ember-try` task that runs your FastBoot tests
 
 #### 2. Update your `.travis.yml` config
 
@@ -183,7 +183,7 @@ env:
 +  - EMBER_TRY_SCENARIO=fastboot-addon-tests
 ```
 
-Now, you'll get a separate Travis CI job that runs just the Fastboot tests. This way, all of your test runs are not slowed down by how long they take to run. As an added bonus, running `ember try:each` will now run your Fastboot tests as well.
+Now, you'll get a separate Travis CI job that runs just the FastBoot tests. This way, all of your test runs are not slowed down by how long they take to run. As an added bonus, running `ember try:each` will now run your FastBoot tests as well.
 
 To see this configuration in action, check out [`ember-steps`][ember-steps].
 
