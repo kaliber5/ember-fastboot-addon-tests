@@ -1,7 +1,7 @@
 {
   "name": "ember-fastboot-addon-tests",
   "version": "0.1.2",
-  "description": "Fastboot testing support for Ember addons",
+  "description": "FastBoot testing support for Ember addons",
   "directories": {
     "doc": "doc",
     "test": "tests"
