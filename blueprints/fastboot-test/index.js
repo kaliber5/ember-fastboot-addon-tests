@@ -1,36 +1,38 @@
 /*jshint node:true*/
-var fs          = require('fs-extra');
-var path        = require('path');
-var chalk       = require('chalk');
-var EmberRouterGenerator = require('ember-router-generator');
+'use strict';
+
+const fs          = require('fs-extra');
+const path        = require('path');
+const chalk       = require('chalk');
+const EmberRouterGenerator = require('ember-router-generator');
 
 module.exports = {
-  description: 'Generate a Fastboot test with a custom route/template added to the temporary app',
+  description: 'Generate a FastBoot test with a custom route/template added to the temporary app',
 
-  shouldEntityTouchRouter: function(name) {
-    var isIndex = name === 'index';
-    var isBasic = name === 'basic';
-    var isApplication = name === 'application';
+  shouldEntityTouchRouter(name) {
+    let isIndex = name === 'index';
+    let isBasic = name === 'basic';
+    let isApplication = name === 'application';
 
     return !isBasic && !isIndex && !isApplication;
   },
 
-  afterInstall: function(options) {
+  afterInstall(options) {
     updateRouter.call(this, 'add', options);
   },
 
-  afterUninstall: function(options) {
+  afterUninstall(options) {
     updateRouter.call(this, 'remove', options);
   }
 };
 
 function updateRouter(action, options) {
-  var entity = options.entity;
-  var actionColorMap = {
+  let entity = options.entity;
+  let actionColorMap = {
     add: 'green',
     remove: 'red'
   };
-  var color = actionColorMap[action] || 'gray';
+  let color = actionColorMap[action] || 'gray';
 
   if (this.shouldEntityTouchRouter(entity.name, options)) {
     writeRoute(action, entity.name, options);
@@ -45,11 +47,11 @@ function findRouter(options) {
 }
 
 function writeRoute(action, name, options) {
-  var routerPath = path.join.apply(null, findRouter(options));
-  var source = fs.readFileSync(routerPath, 'utf-8');
+  let routerPath = path.join.apply(null, findRouter(options));
+  let source = fs.readFileSync(routerPath, 'utf-8');
 
-  var routes = new EmberRouterGenerator(source);
-  var newRoutes = routes[action](name, options);
+  let routes = new EmberRouterGenerator(source);
+  let newRoutes = routes[action](name, options);
 
   fs.writeFileSync(routerPath, newRoutes.code());
 }
