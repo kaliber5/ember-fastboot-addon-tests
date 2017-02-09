@@ -10,6 +10,8 @@ consumes your addon, builds it and spins up a local FastBoot server using [ember
 and then runs your [Mocha](https://mochajs.org/)-based end-to-end test to assert that your addon works as expected or at
 least does not break things up in a FastBoot environment.
 
+Note that this is for Ember *addons* only. For testing *apps* you can use this related project: [ember-fastboot-app-tests](https://github.com/kaliber5/ember-fastboot-app-tests).
+
 ## Installation
 
     ember install ember-fastboot-addon-tests
