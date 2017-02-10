@@ -7,7 +7,7 @@ This is an `ember-cli` addon that makes testing your own addon for compatibility
 
 It works by using [ember-cli-addon-tests](https://github.com/tomdale/ember-cli-addon-tests) to create a (temporary) app that
 consumes your addon, builds it and spins up a local FastBoot server using [ember-cli-fastboot](https://github.com/ember-fastboot/ember-cli-fastboot),
-and then runs your [Mocha](https://mochajs.org/)-based end-to-end test to assert that your addon works as expected or at
+and then runs your [Mocha](https://mochajs.org/)-based end-to-end tests to assert that your addon works as expected or at
 least does not break things up in a FastBoot environment.
 
 Note that this is for Ember *addons* only. For testing *apps* you can use this related project: [ember-fastboot-app-tests](https://github.com/kaliber5/ember-fastboot-app-tests).
@@ -94,7 +94,7 @@ default `index.hbs` defines. Although this might seem not worth testing at first
 that, e.g. by importing some external JavaScript that can only run on a browser.
 
 You may wonder here where all the necessary bootstrap code is, for building the app and spinning up the FastBoot server. The
-good news is, you do not have to care about this, this addon does all of this for you! All the setup and tear down code is
+good news is, you do not have to care about this, this addon takes care of this for you! All the setup and tear down code is
 added to your test suite in some `before` and `after` Mocha hooks.
 
 But you still may have stumbled upon the use of jQuery in the above test, although a chapter before it was said that you have no
@@ -109,8 +109,8 @@ code of 200.
 If that is not the case, the Promise will be rejected and your test will fail. Otherwise the Promise resolves with a
 response object, which is a POJO with the following properties:
 
-* `response`: the node.js response (an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)). You can use that e.g. to check the HTTP headers received
-by accessing `response.headers`.
+* `response`: the node.js response (an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)). 
+You can use that e.g. to check the HTTP headers received by accessing `response.headers`.
 * `jQuery`: although the tests run in node-land and have no real DOM available, with the help of [jsdom](https://github.com/tmpvar/jsdom) - a JavaScript implementation of the DOM standard - a
 kind of faked DOM is available that jQuery can operate upon. So you can express your DOM assertions in a way you are used to from normal Ember tests.
 
