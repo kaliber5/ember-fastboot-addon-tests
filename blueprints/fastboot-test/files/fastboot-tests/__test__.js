@@ -8,9 +8,10 @@ describe('<%= camelizedModuleName %>', function() {
     return this.visit('/<%= url %>')
       .then(function(res) {
         let $ = res.jQuery;
-        // let response = res.response;
+        let response = res.response;
 
         // add your real tests here
+        expect(response.statusCode).to.equal(200);
         expect($('body').length).to.equal(1);
         expect($('h1').text().trim()).to.equal('<%= camelizedModuleName %>');
       });
