@@ -9,6 +9,15 @@ const EmberRouterGenerator = require('ember-router-generator');
 module.exports = {
   description: 'Generate a FastBoot test with a custom route/template added to the temporary app',
 
+  locals(options) {
+    let packageName = options.project.name();
+    let moduleName = (options.entity && options.entity.name) || packageName;
+
+    return {
+      url: moduleName
+    };
+  },
+
   shouldEntityTouchRouter(name) {
     let isIndex = name === 'index';
     let isBasic = name === 'basic';

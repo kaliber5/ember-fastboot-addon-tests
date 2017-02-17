@@ -31,4 +31,22 @@ describe('Acceptance: ember generate and destroy fastboot-test', function() {
       .then(() => emberDestroy(args))
       .then(() => emberDestroy(defaultBlueprintArgs));
   });
+
+  it('fastboot-test foo/bar', function() {
+    let args = ['fastboot-test', 'foo/bar'];
+
+    return emberNew()
+      .then(() => emberGenerate(defaultBlueprintArgs))
+      .then(() => emberGenerate(args))
+      .then(() => {
+        expect(file('fastboot-tests/foo/bar-test.js'))
+          .to.contain('return this.visit(\'/foo/bar\')');
+
+        expect(file('fastboot-tests/fixtures/fastboot/app/router.js'))
+          .to.contain('this.route(\'foo\', function() {')
+          .to.contain('this.route(\'bar\')');
+      })
+      .then(() => emberDestroy(args))
+      .then(() => emberDestroy(defaultBlueprintArgs));
+  });
 });

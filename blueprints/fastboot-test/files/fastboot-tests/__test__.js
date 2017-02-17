@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 describe('<%= camelizedModuleName %>', function() {
 
   it('renders', function() {
-    return this.visit('/<%= camelizedModuleName %>')
+    return this.visit('/<%= url %>')
       .then(function(res) {
         let $ = res.jQuery;
         // let response = res.response;
