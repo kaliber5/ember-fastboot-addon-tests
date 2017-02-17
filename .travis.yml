@@ -25,3 +25,4 @@ install:
 
 script:
   - yarn run nodetest
+  - yarn run fastboottest
