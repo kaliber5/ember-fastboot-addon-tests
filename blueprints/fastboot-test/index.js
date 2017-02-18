@@ -9,12 +9,29 @@ const EmberRouterGenerator = require('ember-router-generator');
 module.exports = {
   description: 'Generate a FastBoot test with a custom route/template added to the temporary app',
 
+  availableOptions: [
+    {
+      name: 'app-name',
+      type: String,
+      default: 'fastboot'
+    }
+  ],
+
   locals(options) {
     let packageName = options.project.name();
     let moduleName = (options.entity && options.entity.name) || packageName;
 
     return {
-      url: moduleName
+      url: moduleName,
+      appName: options.appName
+    };
+  },
+
+  fileMapTokens: function() {
+    return {
+      __appName__: function(options) {
+        return options.locals.appName;
+      }
     };
   },
 
@@ -32,6 +49,18 @@ module.exports = {
 
   afterUninstall(options) {
     updateRouter.call(this, 'remove', options);
+  },
+
+  files() {
+    let files = this._super();
+    if (this.options) {
+      let routerFile = `fastboot-tests/fixtures/${this.options.appName}/app/router.js`;
+      let routerBlueprintFile = 'fastboot-tests/fixtures/__appName__/app/router.js';
+      if (fs.existsSync(routerFile)) {
+        files = files.filter((file) => file !== routerBlueprintFile);
+      }
+    }
+    return files;
   }
 };
 
@@ -52,7 +81,7 @@ function updateRouter(action, options) {
 }
 
 function findRouter(options) {
-  return [options.project.root, 'fastboot-tests', 'fixtures', 'fastboot', 'app', 'router.js'];
+  return [options.project.root, 'fastboot-tests', 'fixtures', options.appName, 'app', 'router.js'];
 }
 
 function writeRoute(action, name, options) {

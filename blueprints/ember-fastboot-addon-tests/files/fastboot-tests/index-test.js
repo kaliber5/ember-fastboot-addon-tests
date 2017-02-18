@@ -4,7 +4,7 @@ const expect = require('chai').expect;
 const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('index', function() {
-  setupTest(/* appName, options */);
+  setupTest('fastboot'/*, options */);
 
   it('renders', function() {
     return this.visit('/')

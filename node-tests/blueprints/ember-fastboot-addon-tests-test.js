@@ -20,6 +20,7 @@ describe('Acceptance: ember generate and destroy ember-fastboot-addon-tests', fu
           .to.contain('Router.map(function() {');
 
         expect(file('fastboot-tests/index-test.js'))
+          .to.contain('setupTest(\'fastboot\'/*, options */);')
           .to.contain('return this.visit(\'/\')');
 
         expect(file('fastboot-tests/fixtures/fastboot/app/templates/index.hbs'))
