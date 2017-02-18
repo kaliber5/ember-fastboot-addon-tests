@@ -70,17 +70,19 @@ Upon first installation of this addon, two fixture files will already have been 
 Together with those two fixtures files a simple test file to start with will have been created. It will look like this:
 
 ```js
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
 describe('index', function() {
+  setupTest('fastboot'/*, options */);
 
   it('renders', function() {
     return this.visit('/')
       .then(function(res) {
-        var $ = res.jQuery;
-        // var response = res.response;
+        let $ = res.jQuery;
+        let response = res.response;
 
         // add your real tests here
+        expect(response.statusCode).to.equal(200);
         expect($('body').length).to.equal(1);
         expect($('h1').text().trim()).to.equal('ember-fastboot-addon-tests');
       });
@@ -104,15 +106,34 @@ DOM and no jQuery available to your tests. This is where the `visit` helper come
 
 This addon gives you a `visit` helper that makes testing pretty easy. You give it a route of your app (as you would do it
 with the `visit` helper in an acceptance test) to make a request to. It then makes a HTTP request to your FastBoot server
-for that route, and returns a `Promise`. When the server receives a response, it will make sure that it has a HTTP status
-code of 200.
-If that is not the case, the Promise will be rejected and your test will fail. Otherwise the Promise resolves with a
-response object, which is a POJO with the following properties:
+for that route, and returns a `Promise`. The Promise will resolve with a response object, which is a POJO with the following properties:
 
 * `response`: the node.js response (an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)). 
 You can use that e.g. to check the HTTP headers received by accessing `response.headers`.
 * `jQuery`: although the tests run in node-land and have no real DOM available, with the help of [jsdom](https://github.com/tmpvar/jsdom) - a JavaScript implementation of the DOM standard - a
 kind of faked DOM is available that jQuery can operate upon. So you can express your DOM assertions in a way you are used to from normal Ember tests.
+
+Instead of a simple URL, you can also supply an object to the `visit` helper with any options that [`request`](https://github.com/request/request#requestoptions-callback) 
+would accept. For example to check for a redirect response you can do this liek this:
+
+```js 
+describe('secure', function() {
+  setupTest('fastboot'/*, options */);
+
+  it('redirects /secure to /', function() {
+    return this.visit({
+      uri: '/secure',
+      followRedirect: false
+    })
+      .then(function(res) {
+        let response = res.response;
+
+        expect(response.statusCode).to.equal(307);
+        expect(response.headers.location).to.match(/^http:\/\/localhost:\d+\/);
+      });
+  });
+});
+```
 
 ## Adding tests
 
@@ -121,10 +142,18 @@ components, as a failing component would break the whole render process. Adding 
 
     ember g fastboot-test foo
 
-This will add a new `foo.hbs` template file and register that route to your `router.js` (all in your `fastboot-tests/fixtures/app` folder). So pretty similar to what `ember g route foo` would do
+This will add a new `foo.hbs` template file and register that route to your `router.js` (all in your `fastboot-tests/fixtures/fastboot/app` folder). So pretty similar to what `ember g route foo` would do
 for a real app. And it would add a `foo-test.js` file with the boilerplate for your new test.
 
 You could then add the component you want to test to your new template file, and add the DOM assertions to your test file, to check that your component will render as expected in a FastBoot environment!
+
+If you have the need to setup different apps to test with, e.g. to add different configs to your `config/environments.js`,
+you can run the blueprint with the `--app-name` option:
+
+    ember g fastboot-test foo --app-name my-app
+    
+This will add a separate set of fixtures in `fastboot-tests/fixtures/my-app/` and a test file that calls `setupTest`
+with that app name to run this test against the `my-app` app.
 
 You can find some simple real world testing examples in the [ember-bootstrap](https://github.com/kaliber5/ember-bootstrap/tree/master/fastboot-tests) repository.
 
