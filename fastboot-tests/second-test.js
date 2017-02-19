@@ -6,7 +6,7 @@ const setupTest = require('ember-fastboot-addon-tests').setupTest;
 describe('second', function() {
   setupTest('second', {
     installPackages: {
-      'ember-bootstrap': '1.0.0-alpha.4'
+      'ember-bootstrap': 'kaliber5/ember-bootstrap#master' // @todo replace with release
     }
   });
 
