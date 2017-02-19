@@ -157,6 +157,13 @@ with that app name to run this test against the `my-app` app.
 
 You can find some simple real world testing examples in the [ember-bootstrap](https://github.com/kaliber5/ember-bootstrap/tree/master/fastboot-tests) repository.
 
+### Test options
+
+The second parameter to the `setupTest` function allows you to set the following options:
+
+* `installPackages`: install additional packages to the app. Use a hash of package name and version specifier pairs,
+just as you would in the app's `package.json`
+
 ## Running your tests
 
     ember fastboot:test

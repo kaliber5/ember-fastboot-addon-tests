@@ -4,7 +4,11 @@ const expect = require('chai').expect;
 const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('second', function() {
-  setupTest('second'/*, options */);
+  setupTest('second', {
+    installPackages: {
+      'ember-bootstrap': '1.0.0-alpha.4'
+    }
+  });
 
   it('renders', function() {
     return this.visit('/')
@@ -16,6 +20,8 @@ describe('second', function() {
         expect(response.statusCode).to.equal(200);
         expect($('body').length).to.equal(1);
         expect($('h1').text().trim()).to.equal('second');
+        expect($('#ember-bootstrap-wormhole').length).to.equal(1);
+
       });
   });
 
