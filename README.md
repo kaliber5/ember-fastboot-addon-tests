@@ -71,6 +71,7 @@ Together with those two fixtures files a simple test file to start with will hav
 
 ```js
 const expect = require('chai').expect;
+const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('index', function() {
   setupTest('fastboot'/*, options */);
