@@ -8,7 +8,8 @@ module.exports = {
 
   includedCommands() {
     return {
-      'fastboot:test': require('./lib/commands/fastboot-test')
+      'fastboot:test': require('./lib/commands/fastboot-test'),
+      'fastboot:serve': require('./lib/commands/fastboot-serve')
     };
   },
 
