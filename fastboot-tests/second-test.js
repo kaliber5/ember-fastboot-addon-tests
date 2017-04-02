@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const setupTest = require('ember-fastboot-addon-tests').setupTest;
+const setupTest = require('../lib/tests/setup');
 
 describe('second', function() {
   setupTest('second', {

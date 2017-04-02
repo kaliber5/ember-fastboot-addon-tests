@@ -191,6 +191,16 @@ You can use any version you would also specify in your `bower.json`, e.g. `relea
 
 See `ember help fastboot:test` for additional options.
 
+### Debugging your test app
+
+You can use the following command to serve your test app, e.g. to check your test selectors of how the fixtures behave:
+ 
+     ember fastboot:serve
+     
+If you have other apps defined with other names as the default `fastboot` app, you can serve that as well:
+
+    ember fastboot:test --app-name <app-name>
+
 ### Working with `ember-try`
 
 By default, addons use [`ember-try`][ember-try] to run tests against multiple versions of dependencies simultaneously on Travis CI.  This system can also be leveraged to run your FastBoot tests in parallel with your browser tests.  It just takes two small changes:
