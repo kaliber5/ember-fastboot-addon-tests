@@ -10,7 +10,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each",
-    "fastboottest": "ember fastboot:test",
+    "fastboottest": "DEBUG=ember-fastboot-addon-tests,ember-cli-addon-tests ember fastboot:test",
     "nodetest": "mocha node-tests --recursive"
   },
   "repository": {
