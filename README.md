@@ -193,11 +193,11 @@ See `ember help fastboot:test` for additional options.
 
 ### Debugging your test app
 
-You can use the following command to serve your test app, e.g. to check your test selectors of how the fixtures behave:
+You can use the following command to serve your test app, e.g. to check your test selectors or how the fixtures behave:
  
      ember fastboot:serve
      
-If you have other apps defined with other names as the default `fastboot` app, you can serve that as well:
+If you have other apps defined with other names as the default `fastboot` in your `setupTest` call, you can serve them as well:
 
     ember fastboot:test --app-name <app-name>
 
