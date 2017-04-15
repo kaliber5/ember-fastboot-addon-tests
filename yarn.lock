@@ -1877,18 +1877,18 @@ ember-cli-babel@^6.0.0-beta.7:
     clone "^2.0.0"
     ember-cli-version-checker "^1.2.0"
 
-ember-cli-blueprint-test-helpers@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-blueprint-test-helpers/-/ember-cli-blueprint-test-helpers-0.14.0.tgz#0b259a6f5ec4d6ab08bb2243c5a66f97c67cda4e"
+ember-cli-blueprint-test-helpers@^0.17.2:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-blueprint-test-helpers/-/ember-cli-blueprint-test-helpers-0.17.2.tgz#13e833d9570c4461fe22d0f375ddf096c5a37e72"
   dependencies:
     chai "^3.3.0"
     chai-as-promised "^6.0.0"
     chai-files "^1.0.0"
     debug "^2.2.0"
-    ember-cli-internal-test-helpers "^0.8.1"
+    ember-cli-internal-test-helpers "^0.9.1"
     exists-sync "0.0.3"
     findup "^0.1.5"
-    fs-extra "^0.30.0"
+    fs-extra "^2.1.0"
     lodash.merge "^4.4.0"
     rsvp "^3.0.17"
     tmp-sync "^1.0.0"
@@ -1951,15 +1951,14 @@ ember-cli-inject-live-reload@^1.4.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/ember-cli-inject-live-reload/-/ember-cli-inject-live-reload-1.6.1.tgz#82b8f5be454815a75e7f6d42c9ce0bc883a914a3"
 
-ember-cli-internal-test-helpers@^0.8.1:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-internal-test-helpers/-/ember-cli-internal-test-helpers-0.8.3.tgz#e9b7db67f3fda4db736d1a319a282c04beada495"
+ember-cli-internal-test-helpers@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-internal-test-helpers/-/ember-cli-internal-test-helpers-0.9.1.tgz#d54a9124bb6408ceba83f049ba8479f4b96cdd19"
   dependencies:
     chai "^3.3.0"
     chai-as-promised "^6.0.0"
     chai-files "^1.1.0"
     chalk "^1.1.1"
-    configstore "^2.0.0"
     debug "^2.2.0"
     exists-sync "0.0.3"
     fs-extra "^0.30.0"
@@ -2843,7 +2842,7 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^2.0.0:
+fs-extra@^2.0.0, fs-extra@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-2.1.2.tgz#046c70163cef9aad46b0e4a7fa467fb22d71de35"
   dependencies:
