@@ -1,5 +1,11 @@
+<a name"0.3.0"></a>
+### 0.3.0 (2017-04-02)
+
+* added `ember fastboot:serve` command to directly run your FastBoot test app
+
+
 <a name"0.2.0"></a>
-### 0.21.0 (2017-02-19)
+### 0.2.0 (2017-02-19)
 
 * fixed nested route blueprint
 * added --app-name option to fastboot-test blueprint to generate test for different test app
