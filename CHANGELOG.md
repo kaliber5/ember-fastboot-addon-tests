@@ -1,3 +1,13 @@
+<a name"0.3.2"></a>
+### 0.3.2 (2017-04-27)
+
+* Added `emberCliFastbootVersion` option to specify FastBoot version
+
+<a name"0.3.1"></a>
+### 0.3.1 (2017-04-16)
+
+* Fix to get ember version from ember-source
+
 <a name"0.3.0"></a>
 ### 0.3.0 (2017-04-02)
 
