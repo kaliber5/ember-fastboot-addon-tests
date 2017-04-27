@@ -6,7 +6,7 @@ const setupTest = require('../lib/tests/setup');
 describe('second', function() {
   setupTest('second', {
     installPackages: {
-      'ember-bootstrap': '1.0.0-alpha.10'
+      'ember-bootstrap': '1.0.0-alpha.12'
     }
   });
 

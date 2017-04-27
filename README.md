@@ -164,6 +164,8 @@ The second parameter to the `setupTest` function allows you to set the following
 
 * `installPackages`: install additional packages to the app. Use a hash of package name and version specifier pairs,
 just as you would in the app's `package.json`
+* `emberCliFastbootVersion`: specify the version of `ember-cli-fastboot` that you wnat to test your addon with. Defaults 
+to 'latest'
 
 ## Running your tests
 
