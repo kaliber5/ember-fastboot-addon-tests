@@ -202,7 +202,7 @@ You can use the following command to serve your test app, e.g. to check your tes
      
 If you have other apps defined with other names as the default `fastboot` in your `setupTest` call, you can serve them as well:
 
-    ember fastboot:test --app-name <app-name>
+    ember fastboot:serve --app-name <app-name>
 
 ### Working with `ember-try`
 
