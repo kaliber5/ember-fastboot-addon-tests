@@ -15,6 +15,12 @@ Note that this is for Ember *addons* only. For testing *apps* you can use this r
 
 ## Installation
 
+This addon depends on `ember-cli-fastboot`, so make sure you have it installed:
+
+    ember install ember-cli-fastboot 
+    
+Then, install the addon:
+
     ember install ember-fastboot-addon-tests
 
 Note that this addon needs at least node.js 4.x (mainly because of FastBoot itself).
