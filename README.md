@@ -1,5 +1,7 @@
 # ember-fastboot-addon-tests
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kaliber5/ember-fastboot-addon-tests.svg)](https://greenkeeper.io/)
+
 [![npm version](https://badge.fury.io/js/ember-fastboot-addon-tests.svg)](https://badge.fury.io/js/ember-fastboot-addon-tests)
 [![Build Status](https://travis-ci.org/kaliber5/ember-fastboot-addon-tests.svg?branch=master)](https://travis-ci.org/kaliber5/ember-fastboot-addon-tests)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-fastboot-addon-tests.svg)](https://emberobserver.com/addons/ember-fastboot-addon-tests)
