@@ -4,7 +4,7 @@ const expect = require('chai').expect;
 const setupTest = require('../lib/tests/setup');
 
 describe('index', function() {
-  setupTest();
+  setupTest('first');
 
   it('renders', function() {
     return this.visit('/')
