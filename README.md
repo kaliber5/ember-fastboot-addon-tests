@@ -190,11 +190,11 @@ You might want to add that command to your `npm test` script in your `package.js
 }
 ```
 
-### Specifying the Ember.js version
+### Specifying the Ember.js or Ember-Data version
 
 By default the FastBoot app will be created with the same Ember.js version you have specified in your addon's `bower.json`. But you can override this with an additional option:
 
-    ember fastboot:test --ember-version <version>
+    ember fastboot:test --ember-version <version> --ember-data-version <version>
 
 You can use any version you would also specify in your `bower.json`, e.g. `release` or `2.4.0`. *Note that FastBoot itself requires at least Ember.js 2.4!*
 
