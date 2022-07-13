@@ -1,3 +1,7 @@
+# Unmaintained
+
+This addon is considered deprecated and unmaintained. We would recommend other testing solution, like [ember-cli-fastboot-testing](https://github.com/embermap/ember-cli-fastboot-testing) instead!
+
 # ember-fastboot-addon-tests
 
 [![npm version](https://badge.fury.io/js/ember-fastboot-addon-tests.svg)](https://badge.fury.io/js/ember-fastboot-addon-tests)
